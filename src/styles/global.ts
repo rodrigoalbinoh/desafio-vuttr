@@ -5,16 +5,17 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     outline: 0;
+    color: #170C3A;
     box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
   }
 
   body {
     --webkit-font-smoothing: antialised;
   }
 
-  body, input, button{
-    font: 20px 'Source Sans Pro', sans-serif;
-    color: #170C3A;
+  body, input, button, span, p{
+    font-size: 20px;
   }
 
   #root{

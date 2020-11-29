@@ -54,15 +54,18 @@ export const Tool = styled.div`
   div.tool-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     > a {
       font-size: 24px;
     }
 
     > button {
+      width: initial;
       background-color: transparent;
       border: none;
       font-weight: 600;
+      color: #170c3a;
     }
   }
 

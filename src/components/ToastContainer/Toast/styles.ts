@@ -6,14 +6,26 @@ interface ContainerProps {
   hasDescription: number;
 }
 
-const toastTypeVariations = {
+const toastTitleVariations = {
   info: css`
-    background: #ebf8ff;
-    color: #3172b7;
+    color: #8f8a9b;
   `,
   success: css`
-    background: #e6fffa;
-    color: #2e656a;
+    color: #ffffff;
+  `,
+  error: css`
+    color: #c53030;
+  `,
+};
+
+const toastTypeVariations = {
+  info: css`
+    background: #ffffff;
+    color: #8f8a9b;
+  `,
+  success: css`
+    background: #12db89;
+    color: #ffffff;
   `,
   error: css`
     background: #fddede;
@@ -26,8 +38,8 @@ export const Container = styled(animated.div)<ContainerProps>`
 
   position: relative;
   padding: 16px 30px 16px 16px;
-  border-radius: 16px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0, 0.2);
+  border-radius: 5px;
+  box-shadow: 0px 20px 25px #0000001a;
 
   display: flex;
 
@@ -44,6 +56,10 @@ export const Container = styled(animated.div)<ContainerProps>`
   div {
     flex: 1;
 
+    strong {
+      ${(props) => toastTitleVariations[props.type || 'info']}
+    }
+
     p {
       margin-top: 4px;
       font-size: 14px;
@@ -52,7 +68,8 @@ export const Container = styled(animated.div)<ContainerProps>`
     }
   }
 
-  button {
+  button.toast--close {
+    width: initial;
     position: absolute;
     right: 16px;
     top: 19px;

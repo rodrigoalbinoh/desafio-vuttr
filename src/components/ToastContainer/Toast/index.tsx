@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
   FiInfo,
   FiXCircle,
 } from 'react-icons/fi'; */
+import { ReactComponent as Close } from '../../../assets/icons/close.svg';
 
 import { Container } from './styles';
 
@@ -49,11 +50,13 @@ const Toast: React.FC<ToastProps> = ({ message, style }) => {
 
       <button
         type="button"
+        className="toast--close"
         onClick={() => {
           removeToast(message.id);
         }}
       >
         {/* <FiXCircle size={18} /> */}
+        <Close />
       </button>
     </Container>
   );
