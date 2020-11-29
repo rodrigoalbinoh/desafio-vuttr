@@ -7,7 +7,7 @@ export const ModalHeader = styled.header`
   padding: 30px 30px 10px 30px;
   strong {
     font-size: 30px;
-    font-family: 'Roboto-slab', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     margin-left: 10px;
   }
   svg {
