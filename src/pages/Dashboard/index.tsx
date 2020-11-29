@@ -6,6 +6,7 @@ import api from '../../services/api';
 
 import * as S from './styles';
 import SearchInput from '../../components/SearchInput';
+import ModalAddTool from '../../components/ModalAddTool';
 
 interface Tool {
   id: number;
@@ -15,9 +16,16 @@ interface Tool {
   tags: string[];
 }
 
+interface ToolData {
+  title: string;
+  description: string;
+  link: string;
+  tags: string;
+}
 const Dashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [tools, setTools] = useState<Tool[]>();
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const loadTools = async (): Promise<void> => {
@@ -31,7 +39,13 @@ const Dashboard: React.FC = () => {
     loadTools();
   }, []);
 
+  const handleAddTool = async (tool: ToolData): Promise<void> => {
+    console.log(tool);
+    const tags = tool.tags.split(' ');
+    console.log(tags);
+  };
   return (
+    <>
     <S.Container>
       <header>
         <h1>VUTTR</h1>
@@ -78,6 +92,13 @@ const Dashboard: React.FC = () => {
         </S.ToolsContainer>
       </main>
     </S.Container>
+
+      <ModalAddTool
+        isOpen={modalOpen}
+        setIsOpen={toogleModal}
+        handleAddTool={handleAddTool}
+      />
+    </>
   );
 };
 
