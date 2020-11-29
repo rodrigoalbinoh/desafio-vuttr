@@ -45,7 +45,7 @@ export const InputContainer = styled.div<InputContainerProps>`
   ${(props) =>
     props.isFocused &&
     css`
-      border-color: #dedce1;
+      border-color: #807b91;
       background-color: #ebeaed;
     `}
   ${(props) =>

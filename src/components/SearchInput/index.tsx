@@ -8,7 +8,7 @@ import React, {
 import { useField } from '@unform/core';
 
 import { Container, Error } from './styles';
-import IconSearch from '../../assets/icons/Icon-Search-2px.svg';
+import { ReactComponent as IconSearch } from '../../assets/icons/Icon-Search-2px.svg';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -53,7 +53,7 @@ const SearchInput: React.FC<InputProps> = ({
       isFilled={isFilled}
       data-testid="input-container"
     >
-      <img src={IconSearch} alt="Search Icon" />
+      <IconSearch />
       <input
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
