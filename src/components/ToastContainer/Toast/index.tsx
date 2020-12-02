@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-/* import {
-  FiAlertCircle,
-  FiCheckCircle,
-  FiInfo,
-  FiXCircle,
-} from 'react-icons/fi'; */
+
 import { ReactComponent as Close } from '../../../assets/icons/close.svg';
+import { ReactComponent as Warning } from '../../../assets/icons/warning.svg';
+import { ReactComponent as Error } from '../../../assets/icons/error.svg';
+import { ReactComponent as Success } from '../../../assets/icons/success.svg';
+import { ReactComponent as Info } from '../../../assets/icons/info.svg';
 
 import { Container } from './styles';
 
@@ -16,11 +15,13 @@ interface ToastProps {
   style: object;
 }
 
-/* const icons = {
-  info: <FiInfo size={20} />,
-  success: <FiCheckCircle size={20} />,
-  error: <FiAlertCircle size={20} />,
-}; */
+const icons = {
+  neutral: '',
+  info: <Info />,
+  warning: <Warning />,
+  success: <Success />,
+  error: <Error />,
+};
 
 const Toast: React.FC<ToastProps> = ({ message, style }) => {
   const { removeToast } = useToast();
@@ -41,7 +42,7 @@ const Toast: React.FC<ToastProps> = ({ message, style }) => {
       hasDescription={Number(!!message.description)}
       style={style}
     >
-      {/* icons[message.type || 'info'] */}
+      {icons[message.type || 'neutral']}
 
       <div>
         <strong>{message.title}</strong>
@@ -55,7 +56,6 @@ const Toast: React.FC<ToastProps> = ({ message, style }) => {
           removeToast(message.id);
         }}
       >
-        {/* <FiXCircle size={18} /> */}
         <Close />
       </button>
     </Container>

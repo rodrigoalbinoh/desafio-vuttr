@@ -5,7 +5,7 @@ import ToastContainer from '../components/ToastContainer';
 
 export interface ToastMessage {
   id: string;
-  type?: 'success' | 'error' | 'info';
+  type?: 'success' | 'error' | 'info' | 'warning' | 'neutral';
   title: string;
   description?: string;
 }

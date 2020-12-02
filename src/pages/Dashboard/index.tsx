@@ -26,7 +26,7 @@ interface ToolData {
 
 const Dashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const [tools, setTools] = useState<Tool[]>();
+  const [tools, setTools] = useState<Tool[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -63,9 +63,24 @@ const Dashboard: React.FC = () => {
   };
 
   const handleAddTool = async (tool: ToolData): Promise<void> => {
-    console.log(tool);
     const tags = tool.tags.split(' ');
-    console.log(tags);
+
+    const response = await api.post('tools', {
+      ...tool,
+      tags,
+    });
+
+    if (response.data) {
+      addToast({
+        type: 'success',
+        title: 'Success!',
+        description: 'The tool was successfully created.',
+      });
+
+      setTools([...tools, response.data]);
+
+      setModalOpen(false);
+    }
   };
 
   const handleDelete = async (id: number): Promise<void> => {
@@ -76,14 +91,14 @@ const Dashboard: React.FC = () => {
     const response = await api.delete(`tools/${id}`);
 
     if (response.status === 200) {
-      const filteredTools = tools?.filter((tool) => tool.id !== id);
+      const filteredTools = tools.filter((tool) => tool.id !== id);
 
       setTools(filteredTools);
 
       addToast({
         type: 'success',
         title: 'Success!',
-        description: 'The selected tool was successfully deleted.',
+        description: 'The tool was successfully deleted.',
       });
     }
   };
