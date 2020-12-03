@@ -24,32 +24,6 @@ export default createGlobalStyle`
     padding: 40px 20px;
   }
 
-  button {
-    width: 100%;
-    cursor: pointer;
-    padding: 13px 26px;
-    font-size: 18px;
-    text-align: center;
-    background: #365DF0;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 5px;
-    font-weight: 600;
-
-    &:hover {
-      background: #2F55CC;
-    }
-
-    &:active {
-      background: #244AA8;
-    }
-
-    &:disabled {
-      color: #E1E7FD;
-      background: #B9C6FA;
-    }
-  }
-
   input[type='checkbox']::before {
     content: ' ';
     width: inherit;
