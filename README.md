@@ -10,7 +10,7 @@ VUTTR - Very Useful Tools to Remember
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License MIT">
   </a>
-  <a href="https://github.com/rodrigoalbinoh/desafio-vuttr/commits/master">
+  <a href="https://github.com/rodrigoalbinoh/desafio-vuttr/commits/main">
     <img src="https://img.shields.io/github/commit-activity/y/rodrigoalbinoh/desafio-vuttr" alt="Commit Activity per Month">
   </a>
 </p>
