@@ -182,8 +182,10 @@ const Dashboard: React.FC = () => {
               <S.Tool key={tool.id}>
                 <div className="tool-header">
                   <a href={tool.link}>{tool.title}</a>
-                  <button
+                  <Button
                     type="button"
+                    level="quartiary"
+                    variant="danger"
                     onClick={() => {
                       setDeletingTool({
                         id: tool.id,
@@ -194,7 +196,7 @@ const Dashboard: React.FC = () => {
                     }}
                   >
                     x remove
-                  </button>
+                  </Button>
                 </div>
                 <div className="tool-body">
                   <p>{tool.description}</p>

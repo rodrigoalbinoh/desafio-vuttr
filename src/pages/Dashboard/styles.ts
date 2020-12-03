@@ -40,7 +40,7 @@ export const FormContainer = styled.div`
       width: 15px;
       height: 15px;
       margin-right: 10px;
-      stroke-width: 2px;
+      stroke-width: 5px;
       stroke: white;
     }
   }
@@ -72,10 +72,7 @@ export const Tool = styled.div`
 
     > button {
       width: initial;
-      background-color: transparent;
-      border: none;
       font-weight: 600;
-      color: #170c3a;
     }
   }
 
