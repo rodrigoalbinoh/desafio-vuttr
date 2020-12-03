@@ -36,6 +36,7 @@ const Dashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [tools, setTools] = useState<Tool[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [searchingTags, setSearchingTags] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [deletingModalOpen, setDeletingModalOpen] = useState(false);
   const [deletingTool, setDeletingTool] = useState<DeletingTool>({
@@ -68,7 +69,9 @@ const Dashboard: React.FC = () => {
   }, [debouncedSearchTerm]);
 
   const handleSearch = async (term: string): Promise<void> => {
-    const response = await api.get(`tools${term && `?q=${term}`}`);
+    const type = searchingTags ? 'tags_like' : 'q';
+
+    const response = await api.get(`tools${term && `?${type}=${term}`}`);
 
     if (response.data) {
       setTools(response.data);
@@ -154,6 +157,10 @@ const Dashboard: React.FC = () => {
                   type="checkbox"
                   name="checkbox-search-tags"
                   id="search-tags"
+                  onChange={() => {
+                    setSearchingTags(!searchingTags);
+                  }}
+                  checked={searchingTags}
                 />
                 <label htmlFor="search-tags">search in tags only</label>
               </div>
