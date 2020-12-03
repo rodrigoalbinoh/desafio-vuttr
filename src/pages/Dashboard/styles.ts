@@ -100,9 +100,6 @@ export const Tool = styled.div`
 
       span.tool-tag {
         font-weight: 600;
-        & + span {
-          /*margin-left: 10px;*/
-        }
       }
     }
   }
