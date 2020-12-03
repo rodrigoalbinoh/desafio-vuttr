@@ -29,7 +29,7 @@ export const FormContainer = styled.div`
 
     div.checkbox {
       > label {
-        margin-left: 5px;
+        margin-left: 10px;
         color: #170c3a;
       }
     }
@@ -42,6 +42,49 @@ export const FormContainer = styled.div`
       margin-right: 10px;
       stroke-width: 5px;
       stroke: white;
+    }
+  }
+
+  @media only screen and (max-width: 425px) {
+    flex-direction: column;
+
+    > form {
+      width: 100%;
+      flex-direction: column;
+
+      > div.input {
+        width: 100%;
+      }
+
+      div.checkbox {
+        margin-top: 10px;
+      }
+    }
+
+    > div.action-buttons {
+      margin-top: 10px;
+      width: 100%;
+    }
+  }
+
+  @media only screen and (min-width: 425px) and (max-width: 768px) {
+    flex-direction: column;
+
+    > form {
+      width: 100%;
+
+      > div.input {
+        width: 70%;
+      }
+
+      div.checkbox {
+        margin-top: 10px;
+      }
+    }
+
+    > div.action-buttons {
+      margin-top: 10px;
+      width: 100%;
     }
   }
 `;
@@ -100,6 +143,16 @@ export const Tool = styled.div`
 
       span.tool-tag {
         font-weight: 600;
+      }
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    div.tool-header {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+
+      > button {
+        align-self: flex-end;
       }
     }
   }
