@@ -8,6 +8,7 @@ import SearchInput from '../../components/SearchInput';
 import ModalAddTool from '../../components/ModalAddTool';
 import useDebounce from '../../hooks/useDebounce';
 import { useToast } from '../../hooks/useToast';
+import ModalRemoveTool from '../../components/ModalRemoveTool';
 
 interface Tool {
   id: number;
@@ -15,6 +16,11 @@ interface Tool {
   description: string;
   link: string;
   tags: string[];
+}
+
+interface DeletingTool {
+  id: number;
+  title: string;
 }
 
 interface ToolData {
@@ -29,6 +35,11 @@ const Dashboard: React.FC = () => {
   const [tools, setTools] = useState<Tool[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [modalOpen, setModalOpen] = useState(false);
+  const [deletingModalOpen, setDeletingModalOpen] = useState(false);
+  const [deletingTool, setDeletingTool] = useState<DeletingTool>({
+    id: 0,
+    title: '',
+  });
 
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
@@ -107,6 +118,10 @@ const Dashboard: React.FC = () => {
     setModalOpen(!modalOpen);
   }
 
+  function toogleDeletingModal(): void {
+    setDeletingModalOpen(!deletingModalOpen);
+  }
+
   return (
     <>
       <S.Container>
@@ -152,7 +167,17 @@ const Dashboard: React.FC = () => {
               <S.Tool key={tool.id}>
                 <div className="tool-header">
                   <a href={tool.link}>{tool.title}</a>
-                  <button type="button" onClick={() => handleDelete(tool.id)}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDeletingTool({
+                        id: tool.id,
+                        title: tool.title,
+                      });
+
+                      toogleDeletingModal();
+                    }}
+                  >
                     x remove
                   </button>
                 </div>
@@ -176,6 +201,20 @@ const Dashboard: React.FC = () => {
         isOpen={modalOpen}
         setIsOpen={toogleModal}
         handleAddTool={handleAddTool}
+      />
+
+      <ModalRemoveTool
+        isOpen={deletingModalOpen}
+        setIsOpen={toogleDeletingModal}
+        deletingTool={deletingTool}
+        handleRemoveTool={handleDelete}
+        cancelRemoval={() => {
+          setDeletingTool({
+            id: 0,
+            title: '',
+          });
+          toogleDeletingModal();
+        }}
       />
     </>
   );
