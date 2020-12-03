@@ -34,6 +34,16 @@ export const FormContainer = styled.div`
       }
     }
   }
+
+  div.action-buttons {
+    svg {
+      width: 15px;
+      height: 15px;
+      margin-right: 10px;
+      stroke-width: 2px;
+      stroke: white;
+    }
+  }
 `;
 
 export const ToolsContainer = styled.div`

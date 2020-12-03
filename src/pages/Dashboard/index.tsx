@@ -9,6 +9,8 @@ import ModalAddTool from '../../components/ModalAddTool';
 import useDebounce from '../../hooks/useDebounce';
 import { useToast } from '../../hooks/useToast';
 import ModalRemoveTool from '../../components/ModalRemoveTool';
+import Button from '../../components/Button';
+import { ReactComponent as PlusIcon } from '../../assets/icons/plus.svg';
 
 interface Tool {
   id: number;
@@ -157,9 +159,15 @@ const Dashboard: React.FC = () => {
               </div>
             </Form>
             <div className="action-buttons">
-              <button type="button" onClick={toogleModal}>
-                + Add
-              </button>
+              <Button
+                type="button"
+                level="primary"
+                variant="neutral"
+                onClick={toogleModal}
+              >
+                <PlusIcon />
+                Add
+              </Button>
             </div>
           </S.FormContainer>
           <S.ToolsContainer>

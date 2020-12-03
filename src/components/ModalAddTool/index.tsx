@@ -7,6 +7,7 @@ import Input from '../Input';
 import getValidationErrors from '../../utils/getValidationErrors';
 import { ReactComponent as PlusIcon } from '../../assets/icons/plus.svg';
 import TextArea from '../TextArea';
+import Button from '../Button';
 
 interface ToolData {
   title: string;
@@ -78,7 +79,9 @@ const ModalAddTool: React.FC<ModalProps> = ({
           </div>
         </div>
         <footer>
-          <button type="submit">Add tool</button>
+          <Button level="primary" variant="neutral" type="submit">
+            Add tool
+          </Button>
         </footer>
       </Form>
     </Modal>
