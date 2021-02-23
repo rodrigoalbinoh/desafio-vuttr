@@ -74,7 +74,7 @@ export const FormContainer = styled.div`
       width: 100%;
 
       > div.input {
-        width: 70%;
+        width: 100%;
       }
 
       div.checkbox {
