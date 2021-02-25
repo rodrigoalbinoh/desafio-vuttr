@@ -50,10 +50,19 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     const loadTools = async (): Promise<void> => {
-      const response = await api.get('tools');
+      try {
+        const response = await api.get('tools');
 
-      if (response.data) {
-        setTools(response.data);
+        if (response.data) {
+          setTools(response.data);
+        }
+      } catch (error) {
+        addToast({
+          type: 'error',
+          title: 'Something went wrong!',
+          description:
+            'We got an error trying to load the tools. Please try again.',
+        });
       }
     };
 
@@ -61,41 +70,62 @@ const Dashboard: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const searchTools = async (): Promise<void> => {
-      handleSearch(debouncedSearchTerm);
-    };
+    if (debouncedSearchTerm) {
+      const searchTools = async (): Promise<void> => {
+        handleSearch(debouncedSearchTerm);
+      };
 
-    searchTools();
+      searchTools();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearchTerm]);
 
   const handleSearch = async (term: string): Promise<void> => {
-    const type = searchingTags ? 'tags_like' : 'q';
+    try {
+      const type = searchingTags ? 'tags_like' : 'q';
 
-    const response = await api.get(`tools${term && `?${type}=${term}`}`);
+      const response = await api.get(`tools${term && `?${type}=${term}`}`);
 
-    if (response.data) {
-      setTools(response.data);
+      if (response.data) {
+        setTools(response.data);
+      }
+    } catch (error) {
+      addToast({
+        type: 'error',
+        title: 'I think we broke something!',
+        description:
+          'We got an error trying to search the tools. Please try again.',
+      });
     }
   };
 
   const handleAddTool = async (tool: ToolData): Promise<void> => {
-    const tags = tool.tags.split(' ');
+    try {
+      const tags = tool.tags.split(' ');
 
-    const response = await api.post('tools', {
-      ...tool,
-      tags,
-    });
-
-    if (response.data) {
-      addToast({
-        type: 'success',
-        title: 'Success!',
-        description: 'The tool was successfully created.',
+      const response = await api.post('tools', {
+        ...tool,
+        tags,
       });
 
-      setTools([...tools, response.data]);
+      if (response.data) {
+        addToast({
+          type: 'success',
+          title: 'Success!',
+          description: 'The tool was successfully created.',
+        });
 
-      setModalOpen(false);
+        setTools([...tools, response.data]);
+
+        setModalOpen(false);
+      }
+    } catch (error) {
+      addToast({
+        type: 'error',
+        title: 'Something went wrong!',
+        description:
+          'We got an error trying to add the tool. Please try again.',
+      });
     }
   };
 
@@ -104,18 +134,31 @@ const Dashboard: React.FC = () => {
       return;
     }
 
-    const response = await api.delete(`tools/${id}`);
+    try {
+      const response = await api.delete(`tools/${id}`);
 
-    if (response.status === 200) {
-      const filteredTools = tools.filter((tool) => tool.id !== id);
+      if (response.status === 200) {
+        const filteredTools = tools.filter((tool) => tool.id !== id);
 
-      setTools(filteredTools);
+        setTools(filteredTools);
 
+        addToast({
+          type: 'success',
+          title: 'Success!',
+          description: 'The tool was successfully deleted.',
+        });
+
+        toogleDeletingModal();
+      }
+    } catch (error) {
       addToast({
-        type: 'success',
-        title: 'Success!',
-        description: 'The tool was successfully deleted.',
+        type: 'error',
+        title: 'Something went wrong!',
+        description:
+          'We got an error trying to delete the tool. Please try again.',
       });
+
+      toogleDeletingModal();
     }
   };
 
