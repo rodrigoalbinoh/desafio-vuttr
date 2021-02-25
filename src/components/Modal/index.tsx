@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 
 interface ModalProps {
-  children: any;
+  children: JSX.Element[];
   isOpen: boolean;
   setIsOpen: () => void;
 }

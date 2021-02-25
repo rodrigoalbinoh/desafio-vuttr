@@ -67,6 +67,8 @@ const Dashboard: React.FC = () => {
     };
 
     loadTools();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
